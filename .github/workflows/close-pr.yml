@@ -1,0 +1,22 @@
+name: Close All Pull Requests
+
+on:
+  pull_request:
+    types:
+      #- labeled
+      #- unlabeled
+      #- synchronize
+      - opened
+      #- edited
+      #- ready_for_review
+      #- reopened
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: crondaemon/close-pr@v1
+      with:
+        # Optional. Post a issue comment just before closing a pull request.
+        comment: "We do not accept PRs. If you have any questions, please feel free to contact us."
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
