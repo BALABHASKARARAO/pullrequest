@@ -20,6 +20,10 @@ jobs:
       - name: Add comment to PR
         env:
           URL: ${{ github.event.pull_request.comments_url }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -O $URL
+           echo $URL
+           echo $repository
+           echo $comment-id
