@@ -19,8 +19,8 @@ jobs:
     steps:
       - name: Add comment to PR
         env:
-          URL: ${{ github.event.issue.comments_url }}
+          URL: ${{ github.event.pull_request.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "bala"
-          echo ${env.URL}
+          echo $URL
