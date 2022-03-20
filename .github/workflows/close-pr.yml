@@ -11,12 +11,17 @@ on:
       #- ready_for_review
       #- reopened
 jobs:
-  run:
+  comment:
+    if: contains(github.event.comment.body, '')
+
     runs-on: ubuntu-latest
+
     steps:
-    - uses: crondaemon/close-pr@v1
-      with:
-        # Optional. Post a issue comment just before closing a pull request.
-        comment: "We do not accept PRs. If you have any questions, please feel free to contact us."
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Add comment to PR
+        env:
+          URL: ${{ github.event.pull_request.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+           echo $URL
+           echo $repository
+           echo $comment-id
